@@ -1,60 +1,22 @@
 #!/bin/bash
+shopt -s extglob
+export LC_COLLATE=C
 PS3="select one of the above : "
+
 select choice in "Create Database" "List Databases" "Connect to Database" "Drop Database" "Exit"
 do
        case $choice in
 	       "Create Database") 
-		       echo "enter database name : "
-		       read name
-		       . scripts/naming_check.sh $name
-		       val="valid"
-		       if [[ $res == $val ]]
-		       then
-			       val=databases/$name
-			       if [ -d $val ] 
-			       then
-                                       echo database already exists
-			       else
-				       mkdir $val
-				       echo $name database created successfully
-                               fi
-		       fi
+		       . scripts/DB_create.sh
 		       ;;
-	       "List Databases") ls databases
+	       "List Databases") 
+		       . scripts/DB_list.sh
 		       ;;
 	       "Connect to Database") 
-		       echo "enter database name : "
-                       read name
-                       . scripts/naming_check.sh $name
-                       val="valid"
-                       if [[ $res == $val ]]
-                       then
-                               val=databases/$name
-                               if [ -d $val ]
-                               then
-                                       cd $val
-				       break
-                               else
-                                       echo $name does not exist
-                               fi
-                       fi
+		       . scripts/DB_connect.sh
 		       ;;
 	       "Drop Database") 
-		       echo "enter database name : "
-                       read name
-                       . scripts/naming_check.sh $name
-                       val="valid"
-                       if [[ $res == $val ]]
-                       then
-                               val=databases/$name
-                               if [ -d $val ]
-                               then
-                                       rm -r $val
-				       echo $name droped successfully
-                               else
-                                       echo $name does not exist
-                               fi
-                       fi
+		       . scripts/DB_drop.sh
 		       ;;
 	       "Exit")
 		       break ;;
