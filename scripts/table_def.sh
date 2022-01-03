@@ -17,9 +17,9 @@ function get_column_datatype {
 	if [ $res = "notvalid" ]; then
 		return
 	fi
-	echo "enter column num $((index+1)) datatype : (int/str)"
+	echo "enter column num $((index+1)) datatype : (number/string)"
 	read datatype
-	if [ $datatype != "int" -a $datatype != "str" ]
+	if [ $datatype != "number" -a $datatype != "string" ]
 	then
 		echo $datatype is not a valid choice
 		res="notvalid"
@@ -48,7 +48,7 @@ second_row="empty"
 while [ $index -ne 1 ]
 do
 	echo "(primary key)"
-	datatype="int"
+	datatype="number"
 	get_column_name
 	add_column
 done
