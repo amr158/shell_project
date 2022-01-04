@@ -61,12 +61,14 @@ function update {
 				if [ ${col_types[$index]} = "number" ]; then
 					re='^[0-9]+([.][0-9]+)?$'
 					if ! [[ $answer =~ $re ]] ; then
+                        echo ""
 						echo "sorry Not a number";	
 						continue ;
 					fi
 				elif [ ${col_types[$index]} = "string" ]; then
 					if [[ $answer =~ [':'] ]]; then
-					    echo "your value cannot contains ':'"
+					    echo ""
+                        echo "your value cannot contains ':'"
 						continue ;
 					fi
 				fi
@@ -87,7 +89,7 @@ function update {
 	done
 }
 
-table_dir="databases/mydb/mytable"
+table_dir=$*
 col_names=($(awk -F: '{for(i=1;i<=NF;i++)if(NR==2)print $i;}' $table_dir))
 col_types=($(awk -F: '{for(i=1;i<=NF;i++)if(NR==1)print $i;}' $table_dir))
 busy_primary=($(awk -F: '{if(NR!=1&&NR!=2)print $1;}' $table_dir))

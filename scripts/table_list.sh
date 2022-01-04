@@ -1,2 +1,2 @@
 #!/bin/bash
-ls $DB_dir
+ls $1

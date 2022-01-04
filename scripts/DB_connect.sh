@@ -14,16 +14,16 @@ then
 				do
 					case $choice in
 						"Create Table") 
-							. scripts/table_create.sh
+							scripts/table_create.sh $DB_dir
 							;;
 						"List Tables") 
-							. scripts/table_list.sh
+							scripts/table_list.sh $DB_dir
 							;;
 						"Connect to Table") 
-							. scripts/table_connect.sh
+							scripts/table_connect.sh $DB_dir
 							;;
 						"Drop Table") 
-							. scripts/table_drop.sh
+							scripts/table_drop.sh $DB_dir
 							;;
 						"Exit")
 							break ;;

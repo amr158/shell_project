@@ -1,4 +1,8 @@
 #!/bin/bash
+shopt -s extglob
+export LC_COLLATE=C
+
+DB_dir=$1
 echo "enter table name : "
 read table_name
 . scripts/table_Exist.sh $table_name

@@ -1,4 +1,6 @@
 #!/bin/bash
+shopt -s extglob
+export LC_COLLATE=C
 
 function get_column_name {
 	echo "enter column num $((index+1)) name :"
@@ -6,7 +8,7 @@ function get_column_name {
 	. scripts/naming_check.sh $col_name
 	if [ $res = "valid" ] 
 	then
-		if [[ " ${cloumn_names[*]} " == *"$col_name"* ]]; then
+		if [[ " ${cloumn_names[*]} " =~ " ${col_name} " ]]; then
 			echo "you already entered this column name"
 			res="notvalid"
 		fi
