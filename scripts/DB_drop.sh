@@ -4,6 +4,7 @@ echo "enter database name : "
 echo ""
 read DB_name
 echo ""
+# check if database exist
 . scripts/DB_Exist.sh $DB_name
 if [ $res = "valid" ] 
 then

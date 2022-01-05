@@ -7,6 +7,7 @@ echo "enter table name : "
 echo ""
 read table_name
 echo ""
+# check if the table exist
 . scripts/table_Exist.sh $table_name
 if [ $res = "valid" ] 
 then
@@ -18,6 +19,7 @@ then
         elif [ $exist = "true" ]
         then
                 PS3=">($table_name table minu) select one of the above : "
+                # view the table
                 scripts/table_view.sh $table_dir $table_name
                 select choice in "select" "insert" "update" "delete" "Exit"
                 do
