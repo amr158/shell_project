@@ -5,7 +5,7 @@ function get_next_free_primary {
 	free_primary=0
 	while [ $free_primary -eq 0 ]
 	do
-		if [[ " ${busy_primary[*]} " =~ " ${tmp} " ]]; then
+		if [[ " ${busy_primary[*]} " != *"$tmp"* ]]; then
 			free_primary=$tmp
 		fi
 		let tmp=$tmp+1
@@ -55,12 +55,14 @@ do
 		if [ ${col_types[$i]} = "number" ]; then
 			re='^[0-9]+([.][0-9]+)?$'
 			if ! [[ $answer =~ $re ]] ; then
+				echo ""
 				echo "sorry Not a number";	
 			else
 				row=$row:$answer
 			fi
 		elif [ ${col_types[$i]} = "string" ]; then
 			if [[ $answer =~ [':'] ]]; then
+				echo ""
 			    echo "your value cannot contains ':'"
 			else
 			    row=$row:$answer
@@ -69,4 +71,5 @@ do
 	done
 done
 echo $row >> $table_dir
+echo ""
 echo "inserted successfully"

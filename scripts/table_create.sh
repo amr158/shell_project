@@ -3,7 +3,9 @@ shopt -s extglob
 export LC_COLLATE=C
 
 DB_dir=$1
+echo ""
 echo "enter table name : "
+echo ""
 read table_name
 . scripts/table_Exist.sh $table_name
 if [ $res = "valid" ] 
@@ -14,9 +16,11 @@ then
                 touch $table_dir
                 echo $first_row >> $table_dir
                 echo $second_row >> $table_dir
+                echo ""
                 echo $table_name table created successfully
         elif [ $exist = "true" ]
         then
+                echo ""
                 echo $table_name table already exist
         fi
 fi

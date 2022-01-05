@@ -3,7 +3,7 @@ shopt -s extglob
 export LC_COLLATE=C
 
 
-function get_col {
+function get_record {
 	while [ "$tmp" == "$record_num" ]
 	do
 		echo ""
@@ -21,15 +21,15 @@ function get_col {
 			else
 				record_num=($(awk -v ans="$answer" -F: '{if($1==ans)print NR;}' $table_dir))
 				tmp=($(awk -v ans="$answer" -F: '{if($1==ans)print $0;}' $table_dir))
-				edit_col=${tmp[*]}
+				edit_record=${tmp[*]}
 			fi
 		fi
 	done
 }
 
 function update {
-	tmp=$edit_col
-	while [ "$tmp" == "$edit_col" ]
+	tmp=$edit_record
+	while [ "$tmp" == "$edit_record" ]
 	do
 		echo ""
 		echo "choose column to edit :"
@@ -82,10 +82,16 @@ function update {
 		let index=$index+1
 		awk -i inplace -v ans="$answer" -v ind="$index" -v r="$record_num"  -F: '{if(NR==r) $ind = ans; print $0;}' OFS=: $table_dir
 		tm=($(awk -v r="$record_num" -F: '{if(NR==r)print $0;}' $table_dir))
-		edit_col=${tm[*]}
-		echo ""
-		echo "record updated successfully"
-		echo ""
+		edit_record=${tm[*]}
+		if [ "$tmp" == "$edit_record" ] then
+			echo ""
+			echo "nothing to update"
+			echo ""
+		else
+			echo ""
+			echo "record updated successfully"
+			echo ""
+		fi
 	done
 }
 
@@ -93,15 +99,13 @@ table_dir=$*
 col_names=($(awk -F: '{for(i=1;i<=NF;i++)if(NR==2)print $i;}' $table_dir))
 col_types=($(awk -F: '{for(i=1;i<=NF;i++)if(NR==1)print $i;}' $table_dir))
 busy_primary=($(awk -F: '{if(NR!=1&&NR!=2)print $1;}' $table_dir))
-typeset -i col_num=${#col_names[@]}
-let col_num=$col_num-1
 typeset -i record_num=0
 tmp=$record_num
-row="empty"
-edit_col="c"
+edit_record="c"
 
 echo ""
 tail -n+2 $table_dir
-get_col
+
+get_record
 
 update

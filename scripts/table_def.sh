@@ -3,12 +3,15 @@ shopt -s extglob
 export LC_COLLATE=C
 
 function get_column_name {
+	echo ""
 	echo "enter column num $((index+1)) name :"
+	echo ""
 	read col_name
 	. scripts/naming_check.sh $col_name
 	if [ $res = "valid" ] 
 	then
 		if [[ " ${cloumn_names[*]} " =~ " ${col_name} " ]]; then
+			echo ""
 			echo "you already entered this column name"
 			res="notvalid"
 		fi
@@ -19,10 +22,12 @@ function get_column_datatype {
 	if [ $res = "notvalid" ]; then
 		return
 	fi
+	echo ""
 	echo "enter column num $((index+1)) datatype : (number/string)"
 	read datatype
 	if [ $datatype != "number" -a $datatype != "string" ]
 	then
+		echo ""
 		echo $datatype is not a valid choice
 		res="notvalid"
 	fi
@@ -64,12 +69,14 @@ do
 done
 
 echo "do you want to add more columns ? ( 'n' to exit / any other key to continue)"
+echo ""
 read ans
 while [ $ans != "n" ]
 do
 	get_column_name
 	get_column_datatype
 	add_column
+	echo ""
 	echo "do you want to add more columns ? ( 'n' to exit / any other key to continue)"
 	read ans
 done
