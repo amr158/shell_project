@@ -7,6 +7,7 @@ echo ""
 echo "enter table name : "
 echo ""
 read table_name
+echo ""
 . scripts/table_Exist.sh $table_name
 if [ $res = "valid" ] 
 then
@@ -18,9 +19,11 @@ then
                 echo $second_row >> $table_dir
                 echo ""
                 echo $table_name table created successfully
+                echo ""
         elif [ $exist = "true" ]
         then
                 echo ""
                 echo $table_name table already exist
+                echo ""
         fi
 fi

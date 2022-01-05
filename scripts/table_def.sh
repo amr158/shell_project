@@ -7,6 +7,7 @@ function get_column_name {
 	echo "enter column num $((index+1)) name :"
 	echo ""
 	read col_name
+	echo ""
 	. scripts/naming_check.sh $col_name
 	if [ $res = "valid" ] 
 	then
@@ -25,6 +26,7 @@ function get_column_datatype {
 	echo ""
 	echo "enter column num $((index+1)) datatype : (number/string)"
 	read datatype
+	echo ""
 	if [ $datatype != "number" -a $datatype != "string" ]
 	then
 		echo ""
@@ -71,6 +73,7 @@ done
 echo "do you want to add more columns ? ( 'n' to exit / any other key to continue)"
 echo ""
 read ans
+echo ""
 while [ $ans != "n" ]
 do
 	get_column_name

@@ -11,9 +11,11 @@ then
                 mkdir $DB_dir
                 echo ""
                 echo $DB_name database created successfully
+                echo ""
         elif [ $exist = "true" ]
         then
                 echo ""
                 echo database already exist
+                echo ""
         fi
 fi

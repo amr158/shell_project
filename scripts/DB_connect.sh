@@ -11,6 +11,7 @@ then
         then
                 echo ""
 				echo $DB_name does not exist
+				echo ""
         elif [ $exist = "true" ]
         then
 			PS3=">($DB_name DB minu) select one of the above : "
@@ -24,12 +25,13 @@ then
 						scripts/table_list.sh $DB_dir $DB_name
 						;;
 					"Connect to Table") 
-						scripts/table_connect.sh $DB_dir
+						scripts/table_connect.sh $DB_dir $DB_name
 						;;
 					"Drop Table") 
 						scripts/table_drop.sh $DB_dir
 						;;
 					"Exit")
+						PS3=">(Main minu)select one of the above : "
 						break ;;
 					*) 
 						echo ""

@@ -14,10 +14,12 @@ then
         then
                 echo ""
                 echo "$table_name does not exist"
+                echo ""
         elif [ $exist = "true" ]
         then
                 rm $table_dir
                 echo ""
                 echo "$table_name dropped successfully"
+                echo ""
         fi
 fi

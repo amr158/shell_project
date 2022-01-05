@@ -14,6 +14,7 @@ then
         then
                 echo ""
                 echo "$table_name does not exist"
+                echo ""
         elif [ $exist = "true" ]
         then
                 PS3=">($table_name table minu) select one of the above : "
@@ -33,6 +34,7 @@ then
                                         scripts/record_delete.sh $table_dir
                                         ;;
                                 "Exit")
+                                        PS3=">($2 DB minu) select one of the above : "
                                         break ;;
                                 *) echo $choice is not a valid choice
                                         ;;
