@@ -83,7 +83,7 @@ function update {
 		awk -i inplace -v ans="$answer" -v ind="$index" -v r="$record_num"  -F: '{if(NR==r) $ind = ans; print $0;}' OFS=: $table_dir
 		tm=($(awk -v r="$record_num" -F: '{if(NR==r)print $0;}' $table_dir))
 		edit_record=${tm[*]}
-		if [ "$tmp" == "$edit_record" ] then
+		if [ "$tmp" == "$edit_record" ]; then
 			echo ""
 			echo "nothing to update"
 			echo ""

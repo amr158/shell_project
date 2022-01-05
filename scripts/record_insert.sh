@@ -28,6 +28,7 @@ do
 	echo "'${col_names[0]}' value"
 	echo "do you want to use auto assign ? ( y to use / any other key to continue without )"
  	read answer
+	echo ""
 	if [ $answer = "y" ] ;then
 		get_next_free_primary
 		row=$free_primary
@@ -37,7 +38,11 @@ do
 		read answer
 		re='^[1-9]+[0-9]*$'
 		if ! [[ $answer =~ $re ]] ; then
+			echo ""
 			echo "sorry Not an positive integer";	
+		elif [[ " ${busy_primary[*]} " == *"$answer"* ]]; then
+			echo ""
+			echo "already exist";
 		else
 			row=$answer
 		fi

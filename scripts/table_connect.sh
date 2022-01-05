@@ -6,6 +6,7 @@ echo ""
 echo "enter table name : "
 echo ""
 read table_name
+echo ""
 . scripts/table_Exist.sh $table_name
 if [ $res = "valid" ] 
 then
