@@ -29,7 +29,7 @@ do
 	echo "do you want to use auto assign ? ( y to use / any other key to continue without )"
  	read answer
 	echo ""
-	if [ $answer = "y" ] ;then
+	if [ "$answer" == "y" ] ;then
 		get_next_free_primary
 		row=$free_primary
 		echo "${col_names[0]} value is $free_primary"
