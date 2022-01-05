@@ -31,6 +31,12 @@ busy_primary=($(awk -F: '{if(NR!=1&&NR!=2)print $1;}' $table_dir))
 typeset -i record_num=0
 tmp=$record_num
 get_record
+col_names=($(awk -F: '{for(i=1;i<=NF;i++)if(NR==2)print $i;}' $table_dir))
 echo ""
-awk -v r="$record_num" -F: '{if(NR==r||NR==2)print $0;}' $table_dir
+for i in "${!col_names[@]}"; 
+do
+	let ind=i+1
+	tmp=($(awk -v r="$record_num" -v ind="$ind" -F: '{if(NR==r)print $ind;}' $table_dir))
+	echo "${col_names[$i]} : ${tmp[*]}"
+done
 echo ""
