@@ -77,12 +77,14 @@ when you enter column name it checks if the name is right , and checks for the c
 - if you choose 3 it will ask you for the pk value then asks you to enter the column you want to edit and checks if it is valid then enter the new value
 
  ![](https://github.com/amr158/shell_project/blob/master/img/79.png)
+ ![](https://github.com/amr158/shell_project/blob/master/img/80.png)
 
 
 
 - if you choose 4 it will ask you to enter the value of the primary key and checks if the pk value exists then it delete the record from the table 
 
- ![](https://github.com/amr158/shell_project/blob/master/img/85.png)
+ ![](https://github.com/amr158/shell_project/blob/master/img/86.png)
+ ![](https://github.com/amr158/shell_project/blob/master/img/87.png)
 
 
 

@@ -13,6 +13,7 @@ function get_next_free_primary {
 }
 
 table_dir=$1
+table_name=$2
 typeset -i free_primary=0
 col_names=($(awk -F: '{for(i=1;i<=NF;i++)if(NR==2)print $i;}' $table_dir))
 col_types=($(awk -F: '{for(i=1;i<=NF;i++)if(NR==1)print $i;}' $table_dir))
@@ -78,3 +79,5 @@ done
 echo $row >> $table_dir
 echo ""
 echo "inserted successfully"
+echo ""
+scripts/table_view.sh $table_dir $table_name

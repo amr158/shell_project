@@ -25,7 +25,8 @@ function get_record {
 	done
 }
 
-table_dir=$*
+table_dir=$1
+table_name=$2
 primary_name=($(awk -F: '{if(NR==2)print $1;}' $table_dir))
 busy_primary=($(awk -F: '{if(NR!=1&&NR!=2)print $1;}' $table_dir))
 typeset -i record_num=0

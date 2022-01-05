@@ -27,18 +27,19 @@ function get_record {
 	done
 }
 
-table_dir=$*
+table_dir=$1
+table_name=$2
 primary_name=($(awk -F: '{if(NR==2)print $1;}' $table_dir))
 busy_primary=($(awk -F: '{if(NR!=1&&NR!=2)print $1;}' $table_dir))
 typeset -i record_num=0
 tmp=$record_num
 delete_record="c"
 
-echo ""
-tail -n+2 $table_dir
+scripts/table_view.sh $table_dir $table_name
 get_record
 
 echo ""
 echo "$delete_record deleted successfully"
 echo ""
 sed -i " /$delete_record/d  " $table_dir
+scripts/table_view.sh $table_dir $table_name

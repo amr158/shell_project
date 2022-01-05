@@ -18,20 +18,21 @@ then
         elif [ $exist = "true" ]
         then
                 PS3=">($table_name table minu) select one of the above : "
+                scripts/table_view.sh $table_dir $table_name
                 select choice in "select" "insert" "update" "delete" "Exit"
                 do
                         case $choice in
                                 "select") 
-                                        scripts/record_select.sh $table_dir
+                                        scripts/record_select.sh $table_dir $table_name
                                         ;;
                                 "insert") 
-                                        scripts/record_insert.sh $table_dir
+                                        scripts/record_insert.sh $table_dir $table_name
                                         ;;
                                 "update") 
-                                        scripts/record_update.sh $table_dir
+                                        scripts/record_update.sh $table_dir $table_name
                                         ;;
                                 "delete") 
-                                        scripts/record_delete.sh $table_dir
+                                        scripts/record_delete.sh $table_dir $table_name
                                         ;;
                                 "Exit")
                                         PS3=">($2 DB minu) select one of the above : "

@@ -95,7 +95,8 @@ function update {
 	done
 }
 
-table_dir=$*
+table_dir=$1
+table_name=$2
 col_names=($(awk -F: '{for(i=1;i<=NF;i++)if(NR==2)print $i;}' $table_dir))
 col_types=($(awk -F: '{for(i=1;i<=NF;i++)if(NR==1)print $i;}' $table_dir))
 busy_primary=($(awk -F: '{if(NR!=1&&NR!=2)print $1;}' $table_dir))
@@ -103,9 +104,9 @@ typeset -i record_num=0
 tmp=$record_num
 edit_record="c"
 
-echo ""
-tail -n+2 $table_dir
+scripts/table_view.sh $table_dir $table_name
 
 get_record
 
 update
+scripts/table_view.sh $table_dir $table_name
