@@ -27,10 +27,11 @@ function get_column_datatype {
 	echo "enter column num $((index+1)) datatype : (number/string)"
 	read datatype
 	echo ""
-	if [ $datatype != "number" -a $datatype != "string" ]
+	if [ "$datatype" != "number" -a "$datatype" != "string" ]
 	then
 		echo ""
 		echo $datatype is not a valid choice
+		echo ""
 		res="notvalid"
 	fi
 }
@@ -74,7 +75,7 @@ echo "do you want to add more columns ? ( 'n' to exit / any other key to continu
 echo ""
 read ans
 echo ""
-while [ $ans != "n" ]
+while [ "$ans" != "n" ]
 do
 	get_column_name
 	get_column_datatype

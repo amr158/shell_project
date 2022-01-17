@@ -111,20 +111,28 @@ function update {
 
 table_dir=$1
 table_name=$2
-# get columns names
-col_names=($(awk -F: '{for(i=1;i<=NF;i++)if(NR==2)print $i;}' $table_dir))
-# get columns datatybes
-col_types=($(awk -F: '{for(i=1;i<=NF;i++)if(NR==1)print $i;}' $table_dir))
-# get primary key values in the table
-busy_primary=($(awk -F: '{if(NR!=1&&NR!=2)print $1;}' $table_dir))
-typeset -i record_num=0
-tmp=$record_num
-edit_record="c"
-# view table before update
-scripts/table_view.sh $table_dir $table_name
-# get record to update
-get_record
-# update the record
-update
-# view table after update
-scripts/table_view.sh $table_dir $table_name
+#check if the table is empty
+tmp=($(awk -F: 'END {print NR;}' $table_dir))
+if [ $tmp -eq 2 ]; then
+	echo ""
+	echo "no records to update "
+	echo ""
+else
+	# get columns names
+	col_names=($(awk -F: '{for(i=1;i<=NF;i++)if(NR==2)print $i;}' $table_dir))
+	# get columns datatybes
+	col_types=($(awk -F: '{for(i=1;i<=NF;i++)if(NR==1)print $i;}' $table_dir))
+	# get primary key values in the table
+	busy_primary=($(awk -F: '{if(NR!=1&&NR!=2)print $1;}' $table_dir))
+	typeset -i record_num=0
+	tmp=$record_num
+	edit_record="c"
+	# view table before update
+	scripts/table_view.sh $table_dir $table_name
+	# get record to update
+	get_record
+	# update the record
+	update
+	# view table after update
+	scripts/table_view.sh $table_dir $table_name
+fi
